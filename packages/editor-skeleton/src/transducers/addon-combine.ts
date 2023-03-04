@@ -193,56 +193,56 @@ export default function (
     });
   }
   if (stylesGroup.length > 0) {
-    combined.push({
-      name: '#styles',
-      title: { type: 'i18n', 'zh-CN': '样式', 'en-US': 'Styles' },
-      items: stylesGroup,
-    });
+    // combined.push({
+    //   name: '#styles',
+    //   title: { type: 'i18n', 'zh-CN': '样式', 'en-US': 'Styles' },
+    //   items: stylesGroup,
+    // });
   }
 
-  if (eventsDefinition.length > 0) {
-    combined.push({
-      name: '#events',
-      title: { type: 'i18n', 'zh-CN': '事件', 'en-US': 'Events' },
-      items: [
-        {
-          name: '__events',
-          title: { type: 'i18n', 'zh-CN': '事件设置', 'en-US': 'Events' },
-          setter: {
-            componentName: 'EventsSetter',
-            props: {
-              definition: eventsDefinition,
-            },
-          },
-          getValue(field: IPublicModelSettingTarget, val?: any[]) {
-            return val;
-          },
+  // if (eventsDefinition.length > 0) {
+  //   combined.push({
+  //     name: '#events',
+  //     title: { type: 'i18n', 'zh-CN': '事件', 'en-US': 'Events' },
+  //     items: [
+  //       {
+  //         name: '__events',
+  //         title: { type: 'i18n', 'zh-CN': '事件设置', 'en-US': 'Events' },
+  //         setter: {
+  //           componentName: 'EventsSetter',
+  //           props: {
+  //             definition: eventsDefinition,
+  //           },
+  //         },
+  //         getValue(field: IPublicModelSettingTarget, val?: any[]) {
+  //           return val;
+  //         },
 
-          setValue(field: IPublicModelSettingTarget, eventData) {
-            const { eventDataList, eventList } = eventData;
-            Array.isArray(eventList) &&
-              eventList.map((item) => {
-                field.parent.clearPropValue(item.name);
-                return item;
-              });
-            Array.isArray(eventDataList) &&
-              eventDataList.map((item) => {
-                field.parent.setPropValue(item.name, {
-                  type: 'JSFunction',
-                  // 需要传下入参
-                  value: `function(){return this.${
-                    item.relatedEventName
-                  }.apply(this,Array.prototype.slice.call(arguments).concat([${
-                    item.paramStr ? item.paramStr : ''
-                  }])) }`,
-                });
-                return item;
-              });
-          },
-        },
-      ],
-    });
-  }
+  //         setValue(field: IPublicModelSettingTarget, eventData) {
+  //           const { eventDataList, eventList } = eventData;
+  //           Array.isArray(eventList) &&
+  //             eventList.map((item) => {
+  //               field.parent.clearPropValue(item.name);
+  //               return item;
+  //             });
+  //           Array.isArray(eventDataList) &&
+  //             eventDataList.map((item) => {
+  //               field.parent.setPropValue(item.name, {
+  //                 type: 'JSFunction',
+  //                 // 需要传下入参
+  //                 value: `function(){return this.${
+  //                   item.relatedEventName
+  //                 }.apply(this,Array.prototype.slice.call(arguments).concat([${
+  //                   item.paramStr ? item.paramStr : ''
+  //                 }])) }`,
+  //               });
+  //               return item;
+  //             });
+  //         },
+  //       },
+  //     ],
+  //   });
+  // }
 
   if (!isRoot) {
     if (supports.condition !== false) {
@@ -353,13 +353,13 @@ export default function (
       });
     }
   }
-  if (advancedGroup.length > 0) {
-    combined.push({
-      name: '#advanced',
-      title: { type: 'i18n', 'zh-CN': '高级', 'en-US': 'Advanced' },
-      items: advancedGroup,
-    });
-  }
+  // if (advancedGroup.length > 0) {
+  //   combined.push({
+  //     name: '#advanced',
+  //     title: { type: 'i18n', 'zh-CN': '高级', 'en-US': 'Advanced' },
+  //     items: advancedGroup,
+  //   });
+  // }
 
   return {
     ...metadata,

@@ -48,6 +48,8 @@ export class SettingsPrimaryPane extends Component<{ engineEditor: Editor; confi
   }
 
   renderBreadcrumb() {
+    console.log("🚀 ~ file: settings-primary-pane.tsx:51 ~ SettingsPrimaryPane ~ renderBreadcrumb ~ renderBreadcrumb:")
+    return <></>
     const { settings } = this.main;
     const { config } = this.props;
     // const shouldIgnoreRoot = config.props?.ignoreRoot;
