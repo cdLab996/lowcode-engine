@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Breadcrumb } from '@alifd/next';
+import { Tab, Breadcrumb, Divider } from '@alifd/next';
 import { Title, observer, Editor, obx, globalContext, engineConfig, makeObservable } from '@alilc/lowcode-editor-core';
 import { Node, SettingField } from '@alilc/lowcode-designer';
 import classNames from 'classnames';
@@ -48,8 +48,6 @@ export class SettingsPrimaryPane extends Component<{ engineEditor: Editor; confi
   }
 
   renderBreadcrumb() {
-    console.log("🚀 ~ file: settings-primary-pane.tsx:51 ~ SettingsPrimaryPane ~ renderBreadcrumb ~ renderBreadcrumb:")
-    return <></>
     const { settings } = this.main;
     const { config } = this.props;
     // const shouldIgnoreRoot = config.props?.ignoreRoot;
@@ -178,16 +176,25 @@ export class SettingsPrimaryPane extends Component<{ engineEditor: Editor; confi
     }
 
     const { items } = settings;
+
+    /**
+     * 组件 title
+     * TODO: 应从 SettingField 扩展
+     * packages\designer\src\designer\setting\setting-prop-entry.ts
+     * packages\designer\src\component-meta.ts
+     * (items[0] as SettingField)?.componentMeta?.componentNameTitle || '未配置组件名称'
+     */
+    const componentTitle: string = (items[0] as unknown as any)?.componentMeta?._transformedMetadata?.title || '未配置组件名称';
     if (items.length > 5 || items.some((item) => !isSettingField(item) || !item.isGroup)) {
       return (
         <div className="lc-settings-main">
-          {this.renderBreadcrumb()}
           <div className="lc-settings-body">
             <SkeletonContext.Consumer>
               {(skeleton) => {
                 if (skeleton) {
                   return (
-                    <StageBox skeleton={skeleton} target={settings} key={settings.id}>
+                    // eslint-disable-next-line max-len
+                    <StageBox skeleton={skeleton} target={settings} key={settings.id} title={componentTitle}>
                       <SettingsPane target={settings} usePopup={false} />
                     </StageBox>
                   );
@@ -206,35 +213,20 @@ export class SettingsPrimaryPane extends Component<{ engineEditor: Editor; confi
         matched = true;
       }
       return (
-        <Tab.Item
-          className="lc-settings-tab-item"
-          title={<Title title={field.title} />}
-          key={field.name}
-          onClick={
-            () => {
-              editor?.eventBus.emit('skeleton.settingsPane.change', {
-                name: field.name,
-                title: field.title,
-              });
+        <SkeletonContext.Consumer key={field.name}>
+          {(skeleton) => {
+            if (skeleton) {
+              return (
+                <StageBox skeleton={skeleton} target={field} key={field.id} title={componentTitle}>
+                  <SettingsPane target={field} key={field.id} usePopup={false} />
+                </StageBox>
+              );
             }
-          }
-        >
-          <SkeletonContext.Consumer>
-            {(skeleton) => {
-              if (skeleton) {
-                return (
-                  <StageBox skeleton={skeleton} target={field} key={field.id}>
-                    <SettingsPane target={field} key={field.id} usePopup={false} />
-                  </StageBox>
-                );
-              }
-              return null;
-            }}
-          </SkeletonContext.Consumer>
-        </Tab.Item>
+            return null;
+          }}
+        </SkeletonContext.Consumer>
       );
     });
-    const activeKey = matched ? this._activeKey : (items[0] as SettingField).name;
 
     const className = classNames('lc-settings-main', {
       'lc-settings-hide-tabs':
@@ -242,19 +234,7 @@ export class SettingsPrimaryPane extends Component<{ engineEditor: Editor; confi
     });
     return (
       <div className={className}>
-        { this.renderBreadcrumb() }
-        <Tab
-          activeKey={activeKey}
-          onChange={(tabKey) => {
-            this._activeKey = tabKey;
-          }}
-          navClassName="lc-settings-tabs"
-          animation={false}
-          excessMode="dropdown"
-          contentClassName="lc-settings-tabs-content"
-        >
-          {tabs}
-        </Tab>
+        {tabs}
       </div>
     );
   }

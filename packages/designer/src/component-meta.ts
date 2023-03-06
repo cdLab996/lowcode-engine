@@ -57,6 +57,12 @@ export function buildFilter(rule?: string | string[] | RegExp | IPublicTypeNesti
 }
 
 export interface IComponentMeta extends IPublicModelComponentMeta {
+
+  /**
+   * 组件名
+   * component name
+   */
+  get componentNameTitle(): string;
 }
 
 export class ComponentMeta implements IComponentMeta {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { observer } from '@alilc/lowcode-editor-core';
+import { Divider } from "@alifd/next";
 import { SettingTopEntry, SettingField } from '@alilc/lowcode-designer';
 import StageChain from './stage-chain';
 import Stage from './stage';
@@ -16,7 +17,13 @@ export type StageBoxProps = typeof StageBoxDefaultProps & {
   children: React.ReactNode;
   skeleton: Skeleton;
   // @todo to remove
+  // eslint-disable-next-line react/no-unused-prop-types
   target?: SettingTopEntry | SettingField;
+
+  /**
+   * 组件 title
+   */
+  title: string;
 };
 
 type WillDetachMember = () => void;
@@ -121,6 +128,10 @@ export default class StageBox extends Component<StageBoxProps> {
         className={className}
       >
 
+        <div className="skeleton-stagebox-componentNameTitle">
+          <p className="skeleton-stagebox-componentNameTitle-c">{this.props.title}</p>
+          <Divider />
+        </div>
         <PopupService popupPipe={this.popupPipe}>
 
           {contentRefer}
