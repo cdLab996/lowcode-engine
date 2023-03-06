@@ -11,11 +11,12 @@
     ]
   },
   "scripts": {
-    "build": "./scripts/build.sh",
+    "build": "bash ./scripts/build.sh",
     "build:npm": "lerna run build --stream",
     "build:umd": "lerna run build:umd --stream",
     "clean": "rimraf ./packages/*/lib ./packages/*/es ./packages/*/dist ./packages/*/build",
     "clean:lib": "rimraf ./node_modules",
+    "clean:all": "bash ./scripts/clean.sh",
     "lint": "f2elint scan -q -i ./packages/*/src",
     "lint:fix": "f2elint fix -i ./packages/*/src",
     "lint:modules": "f2elint scan -q -i ./modules/*/src",
