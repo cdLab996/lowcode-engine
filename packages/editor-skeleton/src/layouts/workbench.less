@@ -183,7 +183,9 @@ body {
   }
   .lc-top-area {
     height: var(--top-area-height);
-    background-color: var(--color-pane-background);
+    // background-color: var(--color-pane-background);
+    // TODO: 修改成后台色值 #EDEFF3;
+    background-color: var(--color-admin-page-large-background);
     width: 100%;
     display: none;
     margin-bottom: 2px;
@@ -202,7 +204,16 @@ body {
       flex: 1;
       display: flex;
       justify-content: center;
+      align-items: center;
       margin: 0 8px;
+
+      &-p {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 400;
+        color: #333;
+        line-height: 25px;
+      }
     }
     .lc-top-area-right {
       display: flex;
@@ -392,7 +403,8 @@ body {
       }
       .lc-main-area {
         flex: 1;
-        background-color: #edeff3;
+        // background-color: #edeff3;
+        background-color: var(--color-pane-background);
       }
       .lc-bottom-area {
         height: var(--bottom-area-height);
@@ -407,10 +419,12 @@ body {
       height: 100%;
       width: var(--right-area-width);
       background-color: var(--color-pane-background);
+      box-shadow: -4px 0 4px 0 rgba(208, 227, 255, 0.2);
       display: none;
       flex-shrink: 0;
-      margin-left: 2px;
+      // margin-left: 2px;
       position: relative;
+      z-index: 10;
       > .lc-panel {
         position: absolute;
         left: 0;

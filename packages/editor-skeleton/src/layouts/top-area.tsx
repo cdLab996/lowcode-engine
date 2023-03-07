@@ -49,7 +49,10 @@ class Contents extends Component<{ area: Area; itemClassName?: string }> {
     return (
       <Fragment>
         <div className="lc-top-area-left">{left}</div>
-        <div className="lc-top-area-center">{center}</div>
+        {/* <div className="lc-top-area-center">{center}</div> */}
+        <div className="lc-top-area-center">
+          <p className="lc-top-area-center-p">添加页面</p>
+        </div>
         <div className="lc-top-area-right">{right}</div>
       </Fragment>
     );

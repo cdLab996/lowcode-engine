@@ -71,20 +71,30 @@
 
   &.lc-inline-field {
     display: flex;
-    align-items: center;
-    margin: 12px;
+    // align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    // margin: 12px;
+    margin: 0 14px 24px 16px;
 
     > .lc-field-head {
-      width: 70px;
-      margin-right: 1px;
+      // width: 70px;
+      // margin-right: 1px;
+      width: 100%;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+      line-height: 24px;
+      padding-bottom: 12px;
       .lc-title-label {
         width: 70px;
         word-break: break-all;
       }
     }
     > .lc-field-body {
-      flex: 1;
-      min-width: 0;
+      // flex: 1;
+      // min-width: 0;
+      width: 100%;
       display: flex;
       align-items: center;
     }
@@ -163,7 +173,7 @@
     > .lc-field-head {
       cursor: pointer;
     }
-    
+
     &.lc-field-is-collapsed {
       margin-bottom: 6px;
     }

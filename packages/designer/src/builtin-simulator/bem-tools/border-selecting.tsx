@@ -54,7 +54,8 @@ export class BorderSelectingInstance extends Component<{
 
     return (
       <div className={className} style={style}>
-        {!dragging && <Toolbar observed={observed} />}
+        {/* {!dragging && <Toolbar observed={observed} />} */}
+        {!dragging && <></>}
       </div>
     );
   }
